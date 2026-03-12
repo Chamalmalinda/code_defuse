@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { getProfile } from '../../services/gameService';
-import { GiRank3, GiBomb } from 'react-icons/gi';
+import { GiRank2, GiTimeBomb } from 'react-icons/gi';
 import { MdCheckCircle, MdDangerous } from 'react-icons/md';
 import { MdArrowBack, MdSportsScore, MdGamepad } from 'react-icons/md';
 import Loading from '../common/Loading';
@@ -50,7 +50,7 @@ const ProfileScreen = () => {
                 
                 <div className="bg-gray-800 border border-green-500 rounded-lg p-6 mb-4">
                     <div className="flex items-center gap-3 mb-4">
-                        <GiBomb className="text-green-400 text-4xl" />
+                        <GiTimeBomb className="text-green-400 text-4xl" />
                         <div>
                             <h2 className="text-xl font-bold text-green-400">{user?.agentName}</h2>
                             <p className="text-gray-400 text-sm">{user?.email}</p>
@@ -59,7 +59,7 @@ const ProfileScreen = () => {
 
                     <div className="grid grid-cols-3 gap-3">
                         <div className="bg-gray-700 rounded-lg p-3 text-center">
-                            <GiRank3 className="text-yellow-400 text-2xl mx-auto mb-1" />
+                            <GiRank2 className="text-yellow-400 text-2xl mx-auto mb-1" />
                             <p className="text-yellow-400 font-bold text-sm">{user?.rank}</p>
                             <p className="text-gray-500 text-xs">RANK</p>
                         </div>

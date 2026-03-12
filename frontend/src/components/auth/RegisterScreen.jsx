@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { GiBomb } from 'react-icons/gi';
+import { GiTimeBomb } from 'react-icons/gi';
 import { MdEmail, MdLock, MdPerson } from 'react-icons/md';
 import Button from '../common/Button';
 import Input from '../common/Input';
@@ -48,7 +48,7 @@ const RegisterScreen = () => {
 
                 
                 <div className="text-center mb-8">
-                    <GiBomb className="text-green-400 text-6xl mx-auto mb-2" />
+                    <GiTimeBomb className="text-green-400 text-6xl mx-auto mb-2" />
                     <h1 className="text-4xl font-bold text-green-400 mb-2">CODE DEFUSE</h1>
                     <p className="text-gray-400 text-sm">NEW AGENT REGISTRATION</p>
                 </div>

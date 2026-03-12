@@ -2,7 +2,7 @@
 import { useGame } from '../../context/GameContext';
 import { formatTime } from '../../utils/helpers';
 import { MdTimer } from 'react-icons/md';
-import { GiWireCoil } from 'react-icons/gi';
+import { GiElectric } from 'react-icons/gi';
 
 const GameHUD = ({ agentName, difficulty }) => {
     const { timeLeft, wiresCut, score } = useGame();
@@ -23,7 +23,7 @@ const GameHUD = ({ agentName, difficulty }) => {
 
                 
                 <div className="flex flex-col items-center">
-                    <GiWireCoil className="text-yellow-400 text-2xl" />
+                    <GiElectric className="text-yellow-400 text-2xl" />
                     <span className="text-yellow-400 font-bold text-lg">{wiresCut}/{totalWires}</span>
                     <span className="text-gray-500 text-xs">WIRES CUT</span>
                 </div>

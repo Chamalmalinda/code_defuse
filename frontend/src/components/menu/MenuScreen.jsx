@@ -1,7 +1,7 @@
 
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { GiBomb, GiRank3 } from 'react-icons/gi';
+import { GiTimeBomb, GiRank2 } from 'react-icons/gi';
 import { MdLeaderboard, MdLogout, MdPlayArrow, MdPerson, MdHelp } from 'react-icons/md';
 import Button from '../common/Button';
 
@@ -20,7 +20,7 @@ const MenuScreen = () => {
 
                 
                 <div className="text-center mb-8">
-                    <GiBomb className="text-green-400 text-6xl mx-auto mb-2" />
+                    <GiTimeBomb className="text-green-400 text-6xl mx-auto mb-2" />
                     <h1 className="text-4xl font-bold text-green-400 mb-1">CODE DEFUSE</h1>
                     <p className="text-gray-400 text-sm">MISSION CONTROL</p>
                 </div>
@@ -28,7 +28,7 @@ const MenuScreen = () => {
                 
                 <div className="bg-gray-700 border border-green-700 rounded-lg p-4 mb-6">
                     <div className="flex items-center gap-2 mb-2">
-                        <GiRank3 className="text-green-400 text-xl" />
+                        <GiRank2 className="text-green-400 text-xl" />
                         <span className="text-green-400 font-bold text-lg">{user?.agentName}</span>
                     </div>
                     <div className="flex justify-between text-sm">

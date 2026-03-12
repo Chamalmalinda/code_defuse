@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useGame } from '../../context/GameContext';
-import { GiBomb } from 'react-icons/gi';
+import { GiTimeBomb } from 'react-icons/gi';
 import { MdArrowBack, MdCheckCircle, MdDangerous } from 'react-icons/md';
 import { DIFFICULTY } from '../../utils/constants';
 import GameHUD from './GameHUD';
@@ -76,7 +76,7 @@ const GameScreen = () => {
                 </div>
 
                 <Button onClick={handleStart} className="w-full flex items-center justify-center gap-2">
-                    <GiBomb className="text-xl" /> BEGIN MISSION
+                    <GiTimeBomb className="text-xl" /> BEGIN MISSION
                 </Button>
             </div>
         </div>

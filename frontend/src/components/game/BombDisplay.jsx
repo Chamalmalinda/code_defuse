@@ -1,5 +1,5 @@
 
-import { GiWireCoil } from 'react-icons/gi';
+import { GiElectric } from 'react-icons/gi';
 import { MdCheckCircle } from 'react-icons/md';
 
 const BombDisplay = ({ wiresCut, totalWires }) => {
@@ -34,7 +34,7 @@ const BombDisplay = ({ wiresCut, totalWires }) => {
                         >
                             {isCut
                                 ? <MdCheckCircle className="text-green-400 text-xl" />
-                                : <GiWireCoil className={`text-xl ${color.split(' ')[1]}`} />
+                                : <GiElectric className={`text-xl ${color.split(' ')[1]}`} />
                             }
                             <div className={`flex-1 h-1 rounded ${isCut ? 'bg-gray-600' : 'bg-current'}`}
                                  style={{ opacity: isCut ? 0.3 : 1 }}

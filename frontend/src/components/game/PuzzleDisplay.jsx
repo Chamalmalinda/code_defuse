@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useGame } from '../../context/GameContext';
 import { MdSend, MdCheckCircle, MdDangerous } from 'react-icons/md';
-import { GiWireCoil } from 'react-icons/gi';
+import { GiElectric } from 'react-icons/gi';
 import Loading from '../common/Loading';
 import Button from '../common/Button';
 import Input from '../common/Input';
@@ -42,7 +42,7 @@ const PuzzleDisplay = () => {
 
             
             <div className="flex items-center gap-2 mb-2">
-                <GiWireCoil className="text-yellow-400 text-lg" />
+                <GiElectric className="text-yellow-400 text-lg" />
                 <h3 className="text-yellow-400 font-bold text-xs tracking-widest">ENCRYPTED WIRE CODE</h3>
             </div>
 
