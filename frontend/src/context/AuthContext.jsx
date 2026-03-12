@@ -41,10 +41,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const register = async (agentName, email, password) => {
-        const data = await registerAgent(agentName, email, password);
-        setToken(data.token);
-        setUser(data.user);
-        localStorage.setItem('token', data.token);
+    await registerAgent(agentName, email, password);
     };
 
     const logout = () => {

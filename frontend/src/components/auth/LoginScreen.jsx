@@ -1,33 +1,33 @@
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { GiTimeBomb } from 'react-icons/gi';
 import { MdEmail, MdLock } from 'react-icons/md';
 import Button from '../common/Button';
-import Input from '../common/Input';
 
 const LoginScreen = () => {
-    const { login }               = useAuth();
-    const navigate                = useNavigate();
-    const [email, setEmail]       = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError]       = useState('');
-    const [loading, setLoading]   = useState(false);
+    const { login }             = useAuth();
+    const navigate              = useNavigate();
+    const emailRef              = useRef('');
+    const passwordRef           = useRef('');
+    const [error, setError]     = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = async () => {
+        const email    = emailRef.current.value;
+        const password = passwordRef.current.value;
+
         if (!email || !password) {
             setError('All fields are required');
             return;
         }
         try {
             setLoading(true);
-            setError('');
             await login(email, password);
             navigate('/menu');
         } catch (err) {
-            setError('Invalid credentials. Try again.');
-        } finally {
+            setError(err.response?.data?.message || 'Invalid credentials. Try again.');
             setLoading(false);
         }
     };
@@ -36,7 +36,7 @@ const LoginScreen = () => {
         <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
             <div className="w-full max-w-md bg-gray-800 border border-green-500 rounded-lg p-8">
 
-               
+                
                 <div className="text-center mb-8">
                     <GiTimeBomb className="text-green-400 text-6xl mx-auto mb-2" />
                     <h1 className="text-4xl font-bold text-green-400 mb-2">CODE DEFUSE</h1>
@@ -56,23 +56,34 @@ const LoginScreen = () => {
                         <label className="text-green-400 text-sm mb-1 flex items-center gap-1">
                             <MdEmail /> AGENT EMAIL
                         </label>
-                        <Input
+                        <input
+                            ref={emailRef}
                             type="email"
                             placeholder="agent@defuse.com"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            className="w-full px-4 py-2 rounded bg-gray-800 border border-green-500 
+                                       text-green-400 placeholder-gray-500 outline-none
+                                       focus:border-green-300 focus:ring-1 focus:ring-green-300
+                                       transition-all duration-200"
                         />
                     </div>
                     <div>
                         <label className="text-green-400 text-sm mb-1 flex items-center gap-1">
                             <MdLock /> ACCESS CODE
                         </label>
-                        <Input
+                        <input
+                            ref={passwordRef}
                             type="password"
                             placeholder="••••••••"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            onKeyDown={e => e.key === 'Enter' && handleLogin()}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                    handleLogin();
+                                }
+                            }}
+                            className="w-full px-4 py-2 rounded bg-gray-800 border border-green-500 
+                                       text-green-400 placeholder-gray-500 outline-none
+                                       focus:border-green-300 focus:ring-1 focus:ring-green-300
+                                       transition-all duration-200"
                         />
                     </div>
 
