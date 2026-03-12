@@ -2,7 +2,7 @@
 
 export const TOTAL_WIRES = 5;
 export const TIMER_START = 60;
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+export const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 export const RANKS = [
     { name: 'Recruit',     minScore: 0    },
