@@ -1,4 +1,3 @@
-
 const Button = ({ children, onClick, type = 'button', variant = 'primary', disabled = false, className = '' }) => {
 
     const variants = {
@@ -13,7 +12,7 @@ const Button = ({ children, onClick, type = 'button', variant = 'primary', disab
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={`px-4 py-2 rounded transition-all duration-200 
+            className={`px-3 py-1.5 rounded-lg text-xs tracking-widest transition-all duration-200 
                         disabled:opacity-50 disabled:cursor-not-allowed 
                         ${variants[variant]} ${className}`}
         >

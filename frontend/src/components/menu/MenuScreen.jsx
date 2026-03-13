@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { GiTimeBomb, GiRank2 } from 'react-icons/gi';
@@ -15,25 +14,27 @@ const MenuScreen = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-gray-800 border border-green-500 rounded-lg p-8">
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+            <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-2xl">
 
                 
                 <div className="text-center mb-8">
                     <GiTimeBomb className="text-green-400 text-6xl mx-auto mb-2" />
-                    <h1 className="text-4xl font-bold text-green-400 mb-1">CODE DEFUSE</h1>
-                    <p className="text-gray-400 text-sm">MISSION CONTROL</p>
+                    <h1 className="text-4xl font-bold text-white mb-1 tracking-widest">
+                        CODE <span className="text-green-400">DEFUSE</span>
+                    </h1>
+                    <p className="text-gray-500 text-xs tracking-[0.25em] uppercase">MISSION CONTROL</p>
                 </div>
 
                 
-                <div className="bg-gray-700 border border-green-700 rounded-lg p-4 mb-6">
+                <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 mb-6">
                     <div className="flex items-center gap-2 mb-2">
                         <GiRank2 className="text-green-400 text-xl" />
-                        <span className="text-green-400 font-bold text-lg">{user?.agentName}</span>
+                        <span className="text-white font-bold text-lg tracking-wide">{user?.agentName}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                        <span className="text-gray-400">Rank: <span className="text-yellow-400">{user?.rank}</span></span>
-                        <span className="text-gray-400">Score: <span className="text-green-400">{user?.totalScore}</span></span>
+                        <span className="text-gray-500">Rank: <span className="text-yellow-400">{user?.rank}</span></span>
+                        <span className="text-gray-500">Score: <span className="text-green-400">{user?.totalScore}</span></span>
                     </div>
                 </div>
 

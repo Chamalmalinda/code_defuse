@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -44,26 +43,28 @@ const RegisterScreen = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-gray-800 border border-green-500 rounded-lg p-8">
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+            <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-2xl">
 
                
                 <div className="text-center mb-8">
                     <GiTimeBomb className="text-green-400 text-6xl mx-auto mb-2" />
-                    <h1 className="text-4xl font-bold text-green-400 mb-2">CODE DEFUSE</h1>
-                    <p className="text-gray-400 text-sm">NEW AGENT REGISTRATION</p>
+                    <h1 className="text-4xl font-bold text-white mb-2 tracking-widest">
+                        CODE <span className="text-green-400">DEFUSE</span>
+                    </h1>
+                    <p className="text-gray-500 text-xs tracking-[0.25em] uppercase">NEW AGENT REGISTRATION</p>
                 </div>
 
                
                 {error && (
-                    <div className="bg-red-900 border border-red-500 text-red-300 px-4 py-2 rounded mb-4 text-sm">
+                    <div className="bg-red-950 border border-red-800 text-red-400 px-4 py-2 rounded-lg mb-4 text-sm">
                         {error}
                     </div>
                 )}
 
               
                 {success && (
-                    <div className="bg-green-900 border border-green-500 text-green-300 px-4 py-2 rounded mb-4 text-sm text-center">
+                    <div className="bg-green-950 border border-green-800 text-green-400 px-4 py-2 rounded-lg mb-4 text-sm text-center">
                         Agent registered successfully! Redirecting to login...
                     </div>
                 )}
@@ -72,8 +73,8 @@ const RegisterScreen = () => {
                 {!success && (
                     <div className="flex flex-col gap-4">
                         <div>
-                            <label className="text-green-400 text-sm mb-1 flex items-center gap-1">
-                                <MdPerson /> AGENT NAME
+                            <label className="text-gray-400 text-xs mb-1.5 flex items-center gap-1.5 uppercase tracking-widest">
+                                <MdPerson className="text-green-500" /> AGENT NAME
                             </label>
                             <Input
                                 placeholder="Agent Smith"
@@ -82,8 +83,8 @@ const RegisterScreen = () => {
                             />
                         </div>
                         <div>
-                            <label className="text-green-400 text-sm mb-1 flex items-center gap-1">
-                                <MdEmail /> AGENT EMAIL
+                            <label className="text-gray-400 text-xs mb-1.5 flex items-center gap-1.5 uppercase tracking-widest">
+                                <MdEmail className="text-green-500" /> AGENT EMAIL
                             </label>
                             <Input
                                 type="email"
@@ -93,8 +94,8 @@ const RegisterScreen = () => {
                             />
                         </div>
                         <div>
-                            <label className="text-green-400 text-sm mb-1 flex items-center gap-1">
-                                <MdLock /> ACCESS CODE
+                            <label className="text-gray-400 text-xs mb-1.5 flex items-center gap-1.5 uppercase tracking-widest">
+                                <MdLock className="text-green-500" /> ACCESS CODE
                             </label>
                             <Input
                                 type="password"
@@ -104,8 +105,8 @@ const RegisterScreen = () => {
                             />
                         </div>
                         <div>
-                            <label className="text-green-400 text-sm mb-1 flex items-center gap-1">
-                                <MdLock /> CONFIRM ACCESS CODE
+                            <label className="text-gray-400 text-xs mb-1.5 flex items-center gap-1.5 uppercase tracking-widest">
+                                <MdLock className="text-green-500" /> CONFIRM ACCESS CODE
                             </label>
                             <Input
                                 type="password"
@@ -132,9 +133,9 @@ const RegisterScreen = () => {
                 )}
 
             
-                <p className="text-center text-gray-500 text-sm mt-6">
+                <p className="text-center text-gray-600 text-sm mt-6">
                     Already an agent?{' '}
-                    <Link to="/" className="text-green-400 hover:text-green-300">
+                    <Link to="/" className="text-green-400 hover:text-green-300 transition-colors">
                         Login here
                     </Link>
                 </p>
