@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useGame } from '../../context/GameContext';
 import { MdSend, MdCheckCircle, MdDangerous } from 'react-icons/md';
@@ -29,26 +28,28 @@ const PuzzleDisplay = () => {
     };
 
     if (loading) return (
-        <div className="bg-gray-800 border border-green-700 rounded-lg p-4 flex items-center justify-center h-32">
+        <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex items-center justify-center h-32">
             <Loading message="Fetching encrypted puzzle..." />
         </div>
     );
 
     return (
-        <div className={`bg-gray-800 border rounded-lg p-3 transition-all duration-300
-                        ${feedback === 'correct' ? 'border-green-400 shadow-lg shadow-green-900'
-                        : feedback === 'wrong'   ? 'border-red-500 shadow-lg shadow-red-900'
-                        :                          'border-green-700'}`}>
+        <div className={`bg-gray-900 border rounded-xl p-3 transition-all duration-300
+                        ${feedback === 'correct' ? 'border-green-500 shadow-lg shadow-green-950'
+                        : feedback === 'wrong'   ? 'border-red-500 shadow-lg shadow-red-950'
+                        :                          'border-gray-800'}`}>
 
             
             <div className="flex items-center gap-2 mb-2">
-                <GiElectric className="text-yellow-400 text-lg" />
+                <GiElectric className="text-yellow-400 text-lg"
+                    style={{ filter: 'drop-shadow(0 0 5px #facc15)' }}
+                />
                 <h3 className="text-yellow-400 font-bold text-xs tracking-widest">ENCRYPTED WIRE CODE</h3>
             </div>
 
             
             {puzzle?.imageUrl && (
-                <div className="mb-2 rounded overflow-hidden border border-gray-600 flex items-center justify-center bg-white"
+                <div className="mb-2 rounded-lg overflow-hidden border border-gray-700 flex items-center justify-center bg-white"
                      style={{ maxHeight: '160px' }}>
                     <img
                         src={puzzle.imageUrl}
@@ -62,12 +63,12 @@ const PuzzleDisplay = () => {
             
             {feedback === 'correct' && (
                 <div className="flex items-center justify-center gap-1 text-green-400 text-xs mb-2 font-bold">
-                    <MdCheckCircle /> WIRE CUT! +BONUS TIME
+                    <MdCheckCircle style={{ filter: 'drop-shadow(0 0 4px #4ade80)' }} /> WIRE CUT! +BONUS TIME
                 </div>
             )}
             {feedback === 'wrong' && (
                 <div className="flex items-center justify-center gap-1 text-red-400 text-xs mb-2 font-bold">
-                    <MdDangerous /> WRONG CODE! TIME PENALTY
+                    <MdDangerous style={{ filter: 'drop-shadow(0 0 4px #f87171)' }} /> WRONG CODE! TIME PENALTY
                 </div>
             )}
 

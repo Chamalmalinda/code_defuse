@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -46,14 +45,16 @@ const GameScreen = () => {
 
 
     if (phase === 'select') return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-gray-800 border border-green-500 rounded-lg p-8">
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+            <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-2xl">
 
                 <div className="flex items-center gap-3 mb-6">
                     <Button variant="secondary" onClick={() => navigate('/menu')}>
                         <MdArrowBack className="text-xl" />
                     </Button>
-                    <h1 className="text-2xl font-bold text-green-400">SELECT DIFFICULTY</h1>
+                    <h1 className="text-2xl font-bold text-white tracking-widest">
+                        SELECT <span className="text-green-400">DIFFICULTY</span>
+                    </h1>
                 </div>
 
                 <div className="flex flex-col gap-3 mb-6">
@@ -61,19 +62,19 @@ const GameScreen = () => {
                         <button
                             key={key}
                             onClick={() => setSelectedDiff(key)}
-                            className={`p-4 rounded-lg border-2 text-left transition-all duration-200
+                            className={`p-4 rounded-xl border-2 text-left transition-all duration-200
                                         ${selectedDiff === key
-                                            ? 'border-green-400 bg-gray-700'
-                                            : 'border-gray-600 bg-gray-800 hover:border-gray-400'}`}
+                                            ? 'border-green-500 bg-gray-800'
+                                            : 'border-gray-700 bg-gray-800 hover:border-gray-500'}`}
                         >
                             <div className="flex justify-between items-center">
                                 <span className={`font-bold text-lg ${
                                     key === 'easy'   ? 'text-green-400' :
                                     key === 'normal' ? 'text-yellow-400' : 'text-red-400'
                                 }`}>{val.label.toUpperCase()}</span>
-                                <span className="text-gray-400 text-sm">{val.time}s</span>
+                                <span className="text-gray-500 text-sm">{val.time}s</span>
                             </div>
-                            <div className="flex gap-4 mt-1 text-xs text-gray-500">
+                            <div className="flex gap-4 mt-1 text-xs text-gray-600">
                                 <span>Wires: {val.wires}</span>
                                 <span>Lives: {val.lives}</span>
                                 <span>Penalty: -{val.wrongPenalty}s</span>
@@ -92,35 +93,39 @@ const GameScreen = () => {
 
 
     if (phase === 'over') return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-gray-800 border rounded-lg p-8 text-center"
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+            <div className="w-full max-w-md bg-gray-900 border rounded-xl p-8 text-center shadow-2xl"
                  style={{ borderColor: gameStatus === 'won' ? '#22c55e' : '#ef4444' }}>
 
                 {gameStatus === 'won' ? (
                     <>
                         <MdCheckCircle className="text-green-400 text-7xl mx-auto mb-4" />
-                        <h2 className="text-3xl font-bold text-green-400 mb-2">BOMB DEFUSED!</h2>
-                        <p className="text-gray-400 mb-4">Mission Complete, Agent {user?.agentName}</p>
+                        <h2 className="text-3xl font-bold text-white mb-2 tracking-widest">
+                            BOMB <span className="text-green-400">DEFUSED!</span>
+                        </h2>
+                        <p className="text-gray-500 mb-4">Mission Complete, Agent {user?.agentName}</p>
                     </>
                 ) : (
                     <>
                         <MdDangerous className="text-red-400 text-7xl mx-auto mb-4" />
-                        <h2 className="text-3xl font-bold text-red-400 mb-2">BOOM!</h2>
-                        <p className="text-gray-400 mb-4">Mission Failed, Agent {user?.agentName}</p>
+                        <h2 className="text-3xl font-bold text-white mb-2 tracking-widest">
+                            <span className="text-red-400">BOOM!</span>
+                        </h2>
+                        <p className="text-gray-500 mb-4">Mission Failed, Agent {user?.agentName}</p>
                     </>
                 )}
 
-                <div className="bg-gray-700 rounded-lg p-4 mb-6">
+                <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 mb-6">
                     <div className="flex justify-between text-sm mb-2">
-                        <span className="text-gray-400">Wires Defused:</span>
+                        <span className="text-gray-500">Wires Defused:</span>
                         <span className="text-green-400 font-bold">{wiresCut}/{totalWires}</span>
                     </div>
                     <div className="flex justify-between text-sm mb-2">
-                        <span className="text-gray-400">Lives Remaining:</span>
+                        <span className="text-gray-500">Lives Remaining:</span>
                         <span className="text-red-400 font-bold">{lives}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                        <span className="text-gray-400">Final Score:</span>
+                        <span className="text-gray-500">Final Score:</span>
                         <span className="text-green-400 font-bold">{score}</span>
                     </div>
                 </div>
@@ -139,13 +144,13 @@ const GameScreen = () => {
 
 
     if (loading) return (
-        <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <div className="min-h-screen bg-gray-950 flex items-center justify-center">
             <Loading message="Initializing mission..." />
         </div>
     );
 
     return (
-        <div className="min-h-screen bg-gray-900 p-3">
+        <div className="min-h-screen bg-gray-950 p-3">
             <div className="max-w-md mx-auto">
 
 
@@ -156,7 +161,7 @@ const GameScreen = () => {
                             onClick={() => setShowAbort(true)}
                             className="text-xs"
                         >
-                            <MdArrowBack className="text-sm" /> ABORT
+                            <MdArrowBack className="text-sm" /> 
                         </Button>
                     ) : (
                         <div className="flex gap-2 items-center">
