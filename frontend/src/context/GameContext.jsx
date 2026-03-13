@@ -12,6 +12,7 @@ export const GameProvider = ({ children }) => {
     const [puzzle, setPuzzle]         = useState(null);
     const [wiresCut, setWiresCut]     = useState(0);
     const [timeLeft, setTimeLeft]     = useState(60);
+    const [lives, setLives]           = useState(3);
     const [gameStatus, setGameStatus] = useState('idle');
     const [loading, setLoading]       = useState(false);
     const [difficulty, setDifficulty] = useState('normal');
@@ -19,11 +20,12 @@ export const GameProvider = ({ children }) => {
     const intervalRef                 = useRef(null);
     const wiresCutRef                 = useRef(0);
     const timeLeftRef                 = useRef(60);
+    const livesRef                    = useRef(3);
     const difficultyRef               = useRef('normal');
 
-   
     const updateWiresCut = (val) => { wiresCutRef.current = val; setWiresCut(val); };
     const updateTimeLeft = (val) => { timeLeftRef.current = val; setTimeLeft(val); };
+    const updateLives    = (val) => { livesRef.current = val; setLives(val); };
 
 
     const loadPuzzle = useCallback(async () => {
@@ -37,7 +39,7 @@ export const GameProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-
+  
     const startTimer = useCallback(() => {
         clearInterval(intervalRef.current);
         intervalRef.current = setInterval(() => {
@@ -58,7 +60,6 @@ export const GameProvider = ({ children }) => {
         clearInterval(intervalRef.current);
     }, []);
 
-
     const adjustTime = useCallback((seconds) => {
         setTimeLeft(prev => {
             const next = Math.max(0, prev + seconds);
@@ -75,12 +76,12 @@ export const GameProvider = ({ children }) => {
         updateWiresCut(0);
         setScore(0);
         updateTimeLeft(diff.time);
+        updateLives(diff.lives);
         setGameStatus('playing');
         await loadPuzzle();
         startTimer();
     }, [loadPuzzle, startTimer]);
 
-  
     const handleCorrectAnswer = useCallback(async () => {
         const diff        = getDifficulty(difficultyRef.current);
         const newWiresCut = wiresCutRef.current + 1;
@@ -95,7 +96,6 @@ export const GameProvider = ({ children }) => {
             setScore(finalScore);
             setGameStatus('won');
 
-
             try {
                 const result = await saveScore({
                     score:         finalScore,
@@ -104,7 +104,6 @@ export const GameProvider = ({ children }) => {
                     status:        'won',
                     difficulty:    difficultyRef.current
                 });
-
                 updateUser({ ...user, totalScore: result.totalScore, rank: result.rank });
             } catch (error) {
                 console.error('Score save failed:', error);
@@ -116,9 +115,21 @@ export const GameProvider = ({ children }) => {
 
 
     const handleWrongAnswer = useCallback(() => {
-        const diff = getDifficulty(difficultyRef.current);
+        const diff     = getDifficulty(difficultyRef.current);
+        const newLives = livesRef.current - 1;
+
+
         adjustTime(-diff.wrongPenalty);
-    }, [adjustTime]);
+
+
+        updateLives(newLives);
+
+
+        if (newLives <= 0) {
+            stopTimer();
+            setGameStatus('exploded');
+        }
+    }, [adjustTime, stopTimer]);
 
 
     const resetGame = useCallback(() => {
@@ -127,12 +138,13 @@ export const GameProvider = ({ children }) => {
         updateWiresCut(0);
         setScore(0);
         updateTimeLeft(60);
+        updateLives(3);
         setGameStatus('idle');
     }, [stopTimer]);
 
     return (
         <GameContext.Provider value={{
-            puzzle, wiresCut, timeLeft, gameStatus,
+            puzzle, wiresCut, timeLeft, lives, gameStatus,
             loading, difficulty, score,
             startGame, resetGame,
             handleCorrectAnswer, handleWrongAnswer

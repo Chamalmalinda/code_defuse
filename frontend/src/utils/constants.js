@@ -13,8 +13,8 @@ export const RANKS = [
 ];
 
 export const DIFFICULTY = {
-    easy:   { time: 90,  label: 'Easy',   wrongPenalty: 5,  correctBonus: 5,  wires: 3 },
-    normal: { time: 60,  label: 'Normal', wrongPenalty: 10, correctBonus: 8,  wires: 5 },
-    hard:   { time: 30,  label: 'Hard',   wrongPenalty: 15, correctBonus: 10, wires: 7 },
+    easy:   { time: 90,  label: 'Easy',   wrongPenalty: 5,  correctBonus: 5,  wires: 3, lives: 3 },
+    normal: { time: 60,  label: 'Normal', wrongPenalty: 10, correctBonus: 8,  wires: 5, lives: 3 },
+    hard:   { time: 30,  label: 'Hard',   wrongPenalty: 15, correctBonus: 10, wires: 7, lives: 3 },
 };
 

@@ -13,11 +13,12 @@ import Button from '../common/Button';
 import Loading from '../common/Loading';
 
 const GameScreen = () => {
-    const { user }                                               = useAuth();
-    const { gameStatus, startGame, resetGame, wiresCut, score, loading } = useGame();
-    const navigate                                               = useNavigate();
-    const [selectedDiff, setSelectedDiff]                       = useState('normal');
-    const [phase, setPhase]                                      = useState('select');
+    const { user }                                                   = useAuth();
+    const { gameStatus, startGame, resetGame, wiresCut, score, loading, lives } = useGame();
+    const navigate                                                   = useNavigate();
+    const [selectedDiff, setSelectedDiff]                           = useState('normal');
+    const [phase, setPhase]                                          = useState('select');
+    const [showAbort, setShowAbort]                                  = useState(false);
 
     const totalWires = DIFFICULTY[selectedDiff]?.wires || 5;
 
@@ -29,6 +30,7 @@ const GameScreen = () => {
     useEffect(() => {
         if (gameStatus === 'won' || gameStatus === 'exploded') {
             setPhase('over');
+            setShowAbort(false);
         }
     }, [gameStatus]);
 
@@ -37,7 +39,12 @@ const GameScreen = () => {
         setPhase('select');
     };
 
-    
+    const handleAbort = () => {
+        resetGame();
+        navigate('/menu');
+    };
+
+
     if (phase === 'select') return (
         <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
             <div className="w-full max-w-md bg-gray-800 border border-green-500 rounded-lg p-8">
@@ -68,6 +75,7 @@ const GameScreen = () => {
                             </div>
                             <div className="flex gap-4 mt-1 text-xs text-gray-500">
                                 <span>Wires: {val.wires}</span>
+                                <span>Lives: {val.lives}</span>
                                 <span>Penalty: -{val.wrongPenalty}s</span>
                                 <span>Bonus: +{val.correctBonus}s</span>
                             </div>
@@ -82,7 +90,7 @@ const GameScreen = () => {
         </div>
     );
 
-    
+
     if (phase === 'over') return (
         <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
             <div className="w-full max-w-md bg-gray-800 border rounded-lg p-8 text-center"
@@ -107,6 +115,10 @@ const GameScreen = () => {
                         <span className="text-gray-400">Wires Defused:</span>
                         <span className="text-green-400 font-bold">{wiresCut}/{totalWires}</span>
                     </div>
+                    <div className="flex justify-between text-sm mb-2">
+                        <span className="text-gray-400">Lives Remaining:</span>
+                        <span className="text-red-400 font-bold">{lives}</span>
+                    </div>
                     <div className="flex justify-between text-sm">
                         <span className="text-gray-400">Final Score:</span>
                         <span className="text-green-400 font-bold">{score}</span>
@@ -125,7 +137,7 @@ const GameScreen = () => {
         </div>
     );
 
-    
+
     if (loading) return (
         <div className="min-h-screen bg-gray-900 flex items-center justify-center">
             <Loading message="Initializing mission..." />
@@ -135,6 +147,30 @@ const GameScreen = () => {
     return (
         <div className="min-h-screen bg-gray-900 p-3">
             <div className="max-w-md mx-auto">
+
+
+                <div className="flex justify-end mb-2">
+                    {!showAbort ? (
+                        <Button
+                            variant="secondary"
+                            onClick={() => setShowAbort(true)}
+                            className="text-xs"
+                        >
+                            <MdArrowBack className="text-sm" /> ABORT
+                        </Button>
+                    ) : (
+                        <div className="flex gap-2 items-center">
+                            <span className="text-red-400 text-xs">Abort mission?</span>
+                            <Button variant="danger" onClick={handleAbort} className="text-xs">
+                                YES
+                            </Button>
+                            <Button variant="secondary" onClick={() => setShowAbort(false)} className="text-xs">
+                                NO
+                            </Button>
+                        </div>
+                    )}
+                </div>
+
                 <GameHUD agentName={user?.agentName} difficulty={selectedDiff} />
                 <BombDisplay wiresCut={wiresCut} totalWires={totalWires} />
                 <PuzzleDisplay />
