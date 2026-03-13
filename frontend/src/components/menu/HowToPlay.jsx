@@ -1,5 +1,4 @@
-// How To Play Screen - Game instructions
-// Reference: React Router docs - https://reactrouter.com/
+
 import { useNavigate } from 'react-router-dom';
 import { GiTimeBomb, GiElectric } from 'react-icons/gi';
 import { MdArrowBack, MdTimer, MdCheckCircle, MdDangerous, MdFavorite } from 'react-icons/md';
