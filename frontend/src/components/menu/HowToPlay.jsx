@@ -1,5 +1,4 @@
-// How To Play Screen - Game instructions
-// Reference: React Router docs - https://reactrouter.com/
+
 import { useNavigate } from 'react-router-dom';
 import { GiTimeBomb, GiElectric } from 'react-icons/gi';
 import { MdArrowBack, MdTimer, MdCheckCircle, MdDangerous, MdFavorite } from 'react-icons/md';
@@ -24,11 +23,7 @@ const HowToPlay = () => {
             title: 'BEAT THE CLOCK',
             desc: 'You have limited time. Correct answers add bonus time. Wrong answers cost you time.'
         },
-        {
-            icon: <MdFavorite className="text-red-400 text-3xl" />,
-            title: 'LIVES SYSTEM',
-            desc: 'You have 3 lives per mission. Each wrong answer costs a life. Lose all lives and the bomb explodes.'
-        },
+
         {
             icon: <MdFavorite className="text-red-400 text-2xl" />,
             title: 'LIVES SYSTEM',
@@ -66,7 +61,7 @@ const HowToPlay = () => {
                     </h1>
                 </div>
 
-                {/* Steps */}
+ 
                 <div className="flex flex-col gap-2 mb-4">
                     {steps.map((step, index) => (
                         <div key={index} className="bg-gray-900 border border-gray-800 rounded-xl p-3 flex items-start gap-3">
@@ -79,7 +74,7 @@ const HowToPlay = () => {
                     ))}
                 </div>
 
-                {/* Difficulty Table */}
+
                 <div className="bg-gray-900 border border-gray-800 rounded-xl p-3 mb-4 shadow-2xl">
                     <h3 className="text-white font-bold mb-2 flex items-center gap-2 text-xs tracking-widest">
                         <GiTimeBomb className="text-green-400" /> DIFFICULTY <span className="text-green-400">LEVELS</span>
@@ -101,7 +96,7 @@ const HowToPlay = () => {
                     ))}
                 </div>
 
-                {/* Start Button */}
+
                 <Button
                     onClick={() => navigate('/game')}
                     className="w-full flex items-center justify-center gap-2"
