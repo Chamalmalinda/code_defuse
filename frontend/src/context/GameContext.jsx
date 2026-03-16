@@ -40,21 +40,37 @@ export const GameProvider = ({ children }) => {
     }, []);
 
   
-    const startTimer = useCallback(() => {
-        clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(() => {
-            setTimeLeft(prev => {
-                const next = prev - 1;
-                timeLeftRef.current = next;
-                if (next <= 0) {
-                    clearInterval(intervalRef.current);
-                    setGameStatus('exploded');
-                    return 0;
-                }
-                return next;
-            });
-        }, 1000);
-    }, []);
+const startTimer = useCallback(() => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(async () => {
+        setTimeLeft(prev => {
+            const next = prev - 1;
+            timeLeftRef.current = next;
+            if (next <= 0) {
+                clearInterval(intervalRef.current);
+                setGameStatus('exploded');
+                
+                const finalScore = calculateScore(
+                    wiresCutRef.current,
+                    0,
+                    difficultyRef.current
+                );
+                setScore(finalScore);
+                saveScore({
+                    score:         finalScore,
+                    wiresDefused:  wiresCutRef.current,
+                    timeRemaining: 0,
+                    status:        'exploded',
+                    difficulty:    difficultyRef.current
+                }).then(result => {
+                    updateUser({ ...user, totalScore: result.totalScore, rank: result.rank });
+                }).catch(err => console.error('Score save failed:', err));
+                return 0;
+            }
+            return next;
+        });
+    }, 1000);
+}, [updateUser, user]);
 
     const stopTimer = useCallback(() => {
         clearInterval(intervalRef.current);
@@ -114,22 +130,41 @@ export const GameProvider = ({ children }) => {
     }, [adjustTime, stopTimer, loadPuzzle, updateUser, user]);
 
 
-    const handleWrongAnswer = useCallback(() => {
-        const diff     = getDifficulty(difficultyRef.current);
-        const newLives = livesRef.current - 1;
+const handleWrongAnswer = useCallback(async () => {
+    const diff     = getDifficulty(difficultyRef.current);
+    const newLives = livesRef.current - 1;
 
 
-        adjustTime(-diff.wrongPenalty);
+    adjustTime(-diff.wrongPenalty);
+
+    updateLives(newLives);
+
+ 
+    if (newLives <= 0) {
+        stopTimer();
+        setGameStatus('exploded');
 
 
-        updateLives(newLives);
-
-
-        if (newLives <= 0) {
-            stopTimer();
-            setGameStatus('exploded');
+        try {
+            const finalScore = calculateScore(
+                wiresCutRef.current,
+                timeLeftRef.current,
+                difficultyRef.current
+            );
+            setScore(finalScore);
+            const result = await saveScore({
+                score:         finalScore,
+                wiresDefused:  wiresCutRef.current,
+                timeRemaining: timeLeftRef.current,
+                status:        'exploded',
+                difficulty:    difficultyRef.current
+            });
+            updateUser({ ...user, totalScore: result.totalScore, rank: result.rank });
+        } catch (error) {
+            console.error('Score save failed:', error);
         }
-    }, [adjustTime, stopTimer]);
+    }
+}, [adjustTime, stopTimer, updateUser, user]);
 
 
     const resetGame = useCallback(() => {
