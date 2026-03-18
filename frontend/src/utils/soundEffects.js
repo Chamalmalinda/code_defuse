@@ -1,6 +1,4 @@
-// Sound Effects using Web Audio API
-// No external library needed - built into browsers
-// Reference: Web Audio API - https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
+
 
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx = null;
@@ -10,7 +8,7 @@ const getAudioContext = () => {
     return audioCtx;
 };
 
-// Correct answer — short positive beep
+
 export const playCorrect = () => {
     try {
         const ctx        = getAudioContext();
@@ -31,7 +29,7 @@ export const playCorrect = () => {
     } catch (e) { console.warn('Sound failed:', e); }
 };
 
-// Wrong answer — negative buzz
+
 export const playWrong = () => {
     try {
         const ctx        = getAudioContext();
@@ -52,7 +50,7 @@ export const playWrong = () => {
     } catch (e) { console.warn('Sound failed:', e); }
 };
 
-// Explosion — deep boom
+
 export const playExplosion = () => {
     try {
         const ctx      = getAudioContext();
@@ -83,11 +81,11 @@ export const playExplosion = () => {
     } catch (e) { console.warn('Sound failed:', e); }
 };
 
-// Mission complete — victory tune
+
 export const playVictory = () => {
     try {
         const ctx    = getAudioContext();
-        const notes  = [523, 659, 784, 1047]; // C, E, G, C (major chord)
+        const notes  = [523, 659, 784, 1047]; 
         
         notes.forEach((freq, i) => {
             const oscillator = ctx.createOscillator();
@@ -108,7 +106,7 @@ export const playVictory = () => {
     } catch (e) { console.warn('Sound failed:', e); }
 };
 
-// Timer tick — subtle click
+
 export const playTick = () => {
     try {
         const ctx        = getAudioContext();

@@ -1,6 +1,4 @@
-/* Custom animations for Code Defuse game */
 
-/* Bomb shake animation - triggered on wrong answer */
 @keyframes shake {
     0%, 100% { transform: translateX(0);     }
     20%       { transform: translateX(-8px);  }
@@ -9,63 +7,63 @@
     80%       { transform: translateX(6px);   }
 }
 
-/* Flash red animation - triggered on explosion */
+
 @keyframes flashRed {
     0%, 100% { background-color: transparent;              }
     50%       { background-color: rgba(239, 68, 68, 0.3);  }
 }
 
-/* Flash green animation - triggered on correct answer */
+
 @keyframes flashGreen {
     0%, 100% { background-color: transparent;             }
     50%       { background-color: rgba(34, 197, 94, 0.2); }
 }
 
-/* Wire cut animation */
+
 @keyframes wireCut {
     0%   { opacity: 1;   transform: scaleX(1);    }
     50%  { opacity: 0.5; transform: scaleX(1.05); }
     100% { opacity: 0.4; transform: scaleX(1);    }
 }
 
-/* Pulse green - correct answer feedback */
+
 @keyframes pulseGreen {
     0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);     }
     50%       { box-shadow: 0 0 15px 5px rgba(34, 197, 94, 0.4); }
 }
 
-/* Pulse red - wrong answer feedback */
+
 @keyframes pulseRed {
     0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);      }
     50%       { box-shadow: 0 0 15px 5px rgba(239, 68, 68, 0.4); }
 }
 
-/* Timer danger pulse - when time is low */
+
 @keyframes dangerPulse {
     0%, 100% { color: #ef4444; }
     50%       { color: #fca5a5; }
 }
 
-/* Explosion animation - game over */
+
 @keyframes explode {
     0%   { transform: scale(1);    opacity: 1; }
     50%  { transform: scale(1.2);  opacity: 0.8; }
     100% { transform: scale(0.95); opacity: 1; }
 }
 
-/* Fade in animation */
+
 @keyframes fadeIn {
     0%   { opacity: 0; transform: translateY(-10px); }
     100% { opacity: 1; transform: translateY(0);     }
 }
 
-/* Glow animation for bomb */
+
 @keyframes glow {
     0%, 100% { filter: drop-shadow(0 0 4px #4ade80);  }
     50%       { filter: drop-shadow(0 0 12px #4ade80); }
 }
 
-/* Utility classes */
+
 .animate-shake        { animation: shake 0.5s ease-in-out;           }
 .animate-flash-red    { animation: flashRed 0.5s ease-in-out;         }
 .animate-flash-green  { animation: flashGreen 0.5s ease-in-out;       }

@@ -25,7 +25,7 @@ export const logoutAgent = async () => {
     return response.data;
 };
 
-// Google login - sends Firebase user data to backend
+
 export const googleLoginService = async (firebaseUser) => {
     const response = await authApi.post('/api/auth/google', {
         uid:         firebaseUser.uid,

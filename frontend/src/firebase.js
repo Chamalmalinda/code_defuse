@@ -1,6 +1,4 @@
-// Firebase configuration and initialization
-// Used for Google OAuth authentication — Interoperability with Google's auth service
-// Reference: Firebase docs - https://firebase.google.com/docs/web/setup
+
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
@@ -13,18 +11,18 @@ const firebaseConfig = {
     appId:             import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase app
+
 const app      = initializeApp(firebaseConfig);
 const auth     = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Google Sign-in with popup
+
 export const signInWithGoogle = async () => {
     const result = await signInWithPopup(auth, provider);
     return result.user;
 };
 
-// Sign out from Firebase
+
 export const signOutFromGoogle = async () => {
     await signOut(auth);
 };

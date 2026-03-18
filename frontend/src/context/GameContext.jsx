@@ -1,7 +1,4 @@
-// Game Context - manages global game state including timer, puzzle, lives and sounds
-// Event-driven core - timer ticks, puzzle fetch, wire cut, lives events managed here
-// Reference: React Context docs - https://react.dev/reference/react/createContext
-// Reference: Web Audio API - https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
+
 import { createContext, useContext, useState, useRef, useCallback } from 'react';
 import { fetchPuzzle } from '../services/puzzleService';
 import { saveScore } from '../services/gameService';
@@ -27,12 +24,12 @@ export const GameProvider = ({ children }) => {
     const livesRef                    = useRef(3);
     const difficultyRef               = useRef('normal');
 
-    // Keep refs in sync with state — needed for setInterval closure
+
     const updateWiresCut = (val) => { wiresCutRef.current = val; setWiresCut(val); };
     const updateTimeLeft = (val) => { timeLeftRef.current = val; setTimeLeft(val); };
     const updateLives    = (val) => { livesRef.current = val; setLives(val); };
 
-    // Load puzzle from Banana API — Interoperability event
+
     const loadPuzzle = useCallback(async () => {
         setLoading(true);
         try {
@@ -44,8 +41,7 @@ export const GameProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    // Start timer — setInterval fires tick event every second
-    // This is the core event-driven mechanism of the game
+
     const startTimer = useCallback(() => {
         clearInterval(intervalRef.current);
         intervalRef.current = setInterval(async () => {
@@ -53,16 +49,16 @@ export const GameProvider = ({ children }) => {
                 const next = prev - 1;
                 timeLeftRef.current = next;
 
-                // Last 10 seconds — play tick sound event
+       
                 if (next <= 10 && next > 0) playTick();
 
                 if (next <= 0) {
-                    // Timer = 0 → explosion event
+       
                     clearInterval(intervalRef.current);
                     setGameStatus('exploded');
                     playExplosion();
 
-                    // Save score on timer expiry
+     
                     const finalScore = calculateScore(
                         wiresCutRef.current,
                         0,
@@ -90,7 +86,7 @@ export const GameProvider = ({ children }) => {
         clearInterval(intervalRef.current);
     }, []);
 
-    // Adjust time — add or deduct seconds based on answer event
+ 
     const adjustTime = useCallback((seconds) => {
         setTimeLeft(prev => {
             const next = Math.max(0, prev + seconds);
@@ -99,7 +95,7 @@ export const GameProvider = ({ children }) => {
         });
     }, []);
 
-    // Start new game — initialize all state and begin timer
+   
     const startGame = useCallback(async (selectedDifficulty = 'normal') => {
         const diff = getDifficulty(selectedDifficulty);
         difficultyRef.current = selectedDifficulty;
@@ -113,26 +109,26 @@ export const GameProvider = ({ children }) => {
         startTimer();
     }, [loadPuzzle, startTimer]);
 
-    // Handle correct answer — wire cut event + bonus time + sound
+
     const handleCorrectAnswer = useCallback(async () => {
         const diff        = getDifficulty(difficultyRef.current);
         const newWiresCut = wiresCutRef.current + 1;
         const totalWires  = diff.wires;
 
-        // Play correct sound event
+
         playCorrect();
         adjustTime(diff.correctBonus);
         updateWiresCut(newWiresCut);
 
         if (newWiresCut >= totalWires) {
-            // All wires cut — mission complete event
+
             stopTimer();
             playVictory();
             const finalScore = calculateScore(newWiresCut, timeLeftRef.current, difficultyRef.current);
             setScore(finalScore);
             setGameStatus('won');
 
-            // Save score to MongoDB
+
             try {
                 const result = await saveScore({
                     score:         finalScore,
@@ -146,32 +142,32 @@ export const GameProvider = ({ children }) => {
                 console.error('Score save failed:', error);
             }
         } else {
-            // Load next puzzle — interoperability event
+ 
             await loadPuzzle();
         }
     }, [adjustTime, stopTimer, loadPuzzle, updateUser, user]);
 
-    // Handle wrong answer — penalty event + life lose + sound
+
     const handleWrongAnswer = useCallback(async () => {
         const diff     = getDifficulty(difficultyRef.current);
         const newLives = livesRef.current - 1;
 
-        // Play wrong sound event
+
         playWrong();
 
-        // Deduct time penalty
+
         adjustTime(-diff.wrongPenalty);
 
-        // Lose a life
+
         updateLives(newLives);
 
-        // Lives 0 → explosion event
+
         if (newLives <= 0) {
             stopTimer();
             setGameStatus('exploded');
             playExplosion();
 
-            // Save score on lives depleted
+
             try {
                 const finalScore = calculateScore(
                     wiresCutRef.current,
@@ -193,7 +189,7 @@ export const GameProvider = ({ children }) => {
         }
     }, [adjustTime, stopTimer, updateUser, user]);
 
-    // Reset game — abort mission or play again
+   
     const resetGame = useCallback(() => {
         stopTimer();
         setPuzzle(null);

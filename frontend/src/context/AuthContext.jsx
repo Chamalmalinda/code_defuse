@@ -61,15 +61,15 @@ const logout = async () => {
     }
 };
 
-// Google OAuth login
+
 const loginWithGoogle = async () => {
-    // Step 1: Firebase Google popup
+
     const firebaseUser = await signInWithGoogle();
     
-    // Step 2: Send Firebase user data to backend — get JWT
+
     const data = await googleLoginService(firebaseUser);
     
-    // Step 3: Set token and user
+
     setToken(data.token);
     setUser(data.user);
     localStorage.setItem('token', data.token);

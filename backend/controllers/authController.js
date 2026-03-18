@@ -83,30 +83,29 @@ exports.logout = (req, res) => {
     res.json({ message: 'Logged out successfully' });
 };
 
-// POST /api/auth/google
-// Google OAuth login - verifies Firebase token and creates/finds user in MongoDB
+
 exports.googleLogin = async (req, res) => {
     try {
         const { uid, email, displayName, photoURL } = req.body;
 
-        // Check if user already exists
+
         let user = await User.findOne({ email });
 
         if (!user) {
-            // New user — create account with Google data
+
             user = await User.create({
                 agentName: displayName || email.split('@')[0],
                 email,
-                password:  uid, // Google uid as password — not used for login
+                password:  uid, 
                 googleId:  uid,
                 photoURL:  photoURL || '',
             });
         }
 
-        // Generate JWT token
+
         const token = generateToken(user._id);
 
-        // Set HttpOnly cookie
+
         res.cookie('token', token, cookieOptions);
 
         res.json({
