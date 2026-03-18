@@ -18,8 +18,11 @@ const MenuScreen = () => {
             <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-2xl">
 
                 
-                <div className="text-center mb-8">
-                    <GiTimeBomb className="text-green-400 text-6xl mx-auto mb-2" />
+                <div className="text-center mb-6">
+                    <GiTimeBomb
+                        className="text-green-400 text-7xl mx-auto mb-3 animate-glow"
+                        style={{ filter: 'drop-shadow(0 0 10px #4ade80)' }}
+                    />
                     <h1 className="text-4xl font-bold text-white mb-1 tracking-widest">
                         CODE <span className="text-green-400">DEFUSE</span>
                     </h1>

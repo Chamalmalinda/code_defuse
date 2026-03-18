@@ -1,7 +1,9 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
-import { loginAgent, registerAgent, logoutAgent } from '../services/authService';
+import { loginAgent, registerAgent, logoutAgent, googleLoginService } from '../services/authService';
 import { getProfile } from '../services/gameService';
+import { signInWithGoogle, signOutFromGoogle } from '../firebase';
+
 
 const AuthContext = createContext();
 
@@ -49,6 +51,7 @@ useEffect(() => {
 const logout = async () => {
     try {
         await logoutAgent();
+        await signOutFromGoogle();
     } catch (error) {
         console.error('Logout failed:', error);
     } finally {
@@ -58,13 +61,27 @@ const logout = async () => {
     }
 };
 
+// Google OAuth login
+const loginWithGoogle = async () => {
+    // Step 1: Firebase Google popup
+    const firebaseUser = await signInWithGoogle();
+    
+    // Step 2: Send Firebase user data to backend — get JWT
+    const data = await googleLoginService(firebaseUser);
+    
+    // Step 3: Set token and user
+    setToken(data.token);
+    setUser(data.user);
+    localStorage.setItem('token', data.token);
+};
+
     
     const updateUser = (updatedUser) => {
         setUser(updatedUser);
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, loading, login, register, logout, updateUser }}>
+        <AuthContext.Provider value={{ user, token, loading, login, register, logout, updateUser, loginWithGoogle  }}>
             {children}
         </AuthContext.Provider>
     );

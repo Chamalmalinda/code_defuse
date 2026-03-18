@@ -59,7 +59,8 @@ const ProfileScreen = () => {
                 
                 <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 mb-4 shadow-2xl">
                     <div className="flex items-center gap-3 mb-4">
-                        <GiTimeBomb className="text-green-400 text-4xl" />
+                        <GiTimeBomb className="text-green-400 text-4xl animate-glow" 
+                        style={{ filter: 'drop-shadow(0 0 10px #4ade80)' }}/>
                         <div>
                             <h2 className="text-xl font-bold text-white tracking-wide">{user?.agentName}</h2>
                             <p className="text-gray-500 text-sm">{user?.email}</p>
