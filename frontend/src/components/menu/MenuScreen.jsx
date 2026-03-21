@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { GiTimeBomb, GiRank2 } from 'react-icons/gi';
-import { MdLeaderboard, MdLogout, MdPlayArrow, MdPerson, MdHelp } from 'react-icons/md';
+import { MdLeaderboard, MdLogout, MdPlayArrow, MdPerson, MdHelp, MdTimer  } from 'react-icons/md';
 import Button from '../common/Button';
 
 const MenuScreen = () => {
@@ -50,6 +50,15 @@ const MenuScreen = () => {
                         <MdPlayArrow className="text-xl" />
                         START MISSION
                     </Button>
+
+                    <Button
+                        onClick={() => navigate('/daily')}
+                        variant="danger"
+                        className="w-full flex items-center justify-center gap-2"
+                    >
+                       <MdTimer className="text-xl" />
+                       DAILY CHALLENGE
+                   </Button>
 
                     <Button
                         onClick={() => navigate('/profile')}

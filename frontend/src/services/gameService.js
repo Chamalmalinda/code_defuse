@@ -18,3 +18,13 @@ export const getProfile = async () => {
     const response = await api.get('/api/users/profile');
     return response.data;
 };
+
+export const checkDailyChallenge = async () => {
+    const response = await api.get('/api/game/daily/check');
+    return response.data;
+};
+
+export const saveDailyScore = async (scoreData) => {
+    const response = await api.post('/api/game/daily/score', scoreData);
+    return response.data;
+};

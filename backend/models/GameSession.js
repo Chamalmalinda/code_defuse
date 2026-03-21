@@ -5,6 +5,8 @@ const GameSessionSchema = new mongoose.Schema({
     user:          { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     agentName:     { type: String, required: true },
     score:         { type: Number, default: 0 },
+    isDaily:       { type: Boolean, default: false },
+    dailyDate:     { type: String, default: null },
     wiresDefused:  { type: Number, default: 0 },
     timeRemaining: { type: Number, default: 0 },
     status:        { type: String, enum: ['won', 'exploded'], required: true },

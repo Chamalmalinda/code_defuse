@@ -10,6 +10,7 @@ import HowToPlay from './components/menu/HowToPlay';
 import GameScreen from './components/game/GameScreen';
 import Loading from './components/common/Loading';
 import Leaderboard from './components/menu/Leaderboard';
+import DailyChallenge from './components/menu/DailyChallenge';
 
 
 
@@ -41,6 +42,7 @@ const AppRoutes = () => {
             <Route path="/profile"     element={<ProtectedRoute><ProfileScreen key={location.key} /></ProtectedRoute>} />
             <Route path="/how-to-play" element={<ProtectedRoute><HowToPlay /></ProtectedRoute>} />
             <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
+            <Route path="/daily"       element={<ProtectedRoute><DailyChallenge /></ProtectedRoute>} />
         </Routes>
     );
 };

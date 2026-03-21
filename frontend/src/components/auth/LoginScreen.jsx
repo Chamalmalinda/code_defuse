@@ -1,7 +1,4 @@
-// Login Screen - Agent authentication UI
-// Virtual Identity - agent logs in to establish their identity
-// Supports both regular login and Google OAuth
-// Reference: React docs - https://react.dev/reference/react/useState
+
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -54,7 +51,7 @@ const LoginScreen = () => {
         <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
             <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-2xl">
 
-                {/* Header */}
+
                 <div className="text-center mb-8">
                     <GiTimeBomb
                         className="text-green-400 text-7xl mx-auto mb-3 animate-glow"
@@ -66,14 +63,14 @@ const LoginScreen = () => {
                     <p className="text-gray-600 text-xs tracking-[0.25em]">AGENT AUTHENTICATION REQUIRED</p>
                 </div>
 
-                {/* Error box */}
+
                 {error && (
                     <div className="bg-red-950 border border-red-800 text-red-400 px-4 py-2 rounded-lg mb-4 text-sm">
                         {error}
                     </div>
                 )}
 
-                {/* Form */}
+
                 <div className="flex flex-col gap-4">
                     <div>
                         <label className="text-green-400 text-xs mb-1 flex items-center gap-1 tracking-widest">
@@ -112,14 +109,14 @@ const LoginScreen = () => {
                         {loading ? 'AUTHENTICATING...' : 'BEGIN MISSION'}
                     </Button>
 
-                    {/* Divider */}
+
                     <div className="flex items-center gap-3">
                         <div className="flex-1 h-px bg-gray-700" />
                         <span className="h-1 text-gray-600 text-xs">OR</span>
                         <div className="flex-1 h-px bg-gray-700" />
                     </div>
 
-                    {/* Google Login */}
+
                     <button
                         onClick={handleGoogleLogin}
                         disabled={googleLoading}
@@ -133,7 +130,7 @@ const LoginScreen = () => {
                     </button>
                 </div>
 
-                {/* Register link */}
+
                 <p className="text-center text-gray-600 text-sm mt-6">
                     New agent?{' '}
                     <Link to="/register" className="text-green-400 hover:text-green-300">

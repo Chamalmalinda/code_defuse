@@ -1,6 +1,3 @@
-// Leaderboard Screen - displays top 10 agent scores
-// Fetches data from MongoDB via backend API
-// Reference: React docs - https://react.dev/reference/react/useEffect
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getLeaderboard } from '../../services/gameService';
@@ -72,7 +69,7 @@ const Leaderboard = () => {
         <div className="min-h-screen bg-gray-950 p-4">
             <div className="max-w-md mx-auto">
 
-                {/* Header */}
+
                 <div className="flex items-center gap-3 mb-6">
                     <Button variant="secondary" onClick={() => navigate('/menu')}>
                         <MdArrowBack className="text-xl" />
@@ -86,24 +83,24 @@ const Leaderboard = () => {
                     </Button>
                 </div>
 
-                {/* Top 3 podium */}
+
                 {scores.length >= 3 && (
                     <div className="grid grid-cols-3 gap-2 mb-4">
-                        {/* 2nd place */}
+
                         <div className="bg-gray-900 border border-gray-600 rounded-xl p-3 text-center mt-4">
                             <MdMilitaryTech className="text-gray-300 text-2xl mx-auto" />
                             <p className="text-white text-xs font-bold mt-1 truncate">{scores[1]?.agentName}</p>
                             <p className="text-gray-300 font-bold text-sm">{scores[1]?.score}</p>
                             <p className="text-gray-600 text-xs">pts</p>
                         </div>
-                        {/* 1st place */}
+
                         <div className="bg-yellow-950 border border-yellow-700 rounded-xl p-3 text-center">
                             <MdMilitaryTech className="text-yellow-400 text-3xl mx-auto" />
                             <p className="text-white text-xs font-bold mt-1 truncate">{scores[0]?.agentName}</p>
                             <p className="text-yellow-400 font-bold text-base">{scores[0]?.score}</p>
                             <p className="text-gray-600 text-xs">pts</p>
                         </div>
-                        {/* 3rd place */}
+
                         <div className="bg-gray-900 border border-orange-700 rounded-xl p-3 text-center mt-6">
                             <MdMilitaryTech className="text-orange-400 text-2xl mx-auto" />
                             <p className="text-white text-xs font-bold mt-1 truncate">{scores[2]?.agentName}</p>
@@ -113,14 +110,14 @@ const Leaderboard = () => {
                     </div>
                 )}
 
-                {/* Error */}
+
                 {error && (
                     <div className="bg-red-950 border border-red-800 text-red-400 px-4 py-2 rounded-lg mb-4 text-xs tracking-wide">
                         {error}
                     </div>
                 )}
 
-                {/* Full list */}
+
                 {scores.length === 0 ? (
                     <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 text-center shadow-2xl">
                         <GiTimeBomb className="text-green-400 text-5xl mx-auto mb-3"
@@ -138,12 +135,12 @@ const Leaderboard = () => {
                                                 ${getRankBg(index, isCurrentUser)}
                                                 ${isCurrentUser ? 'border-green-500' : getRankBorder(index)}`}
                                 >
-                                    {/* Rank */}
+
                                     <div className="w-8 flex items-center justify-center">
                                         {getRankLabel(index)}
                                     </div>
 
-                                    {/* Agent Info */}
+
                                     <div className="flex-1">
                                         <div className="flex items-center gap-2">
                                             <span className={`font-bold text-sm ${isCurrentUser ? 'text-green-400' : 'text-white'}`}>
@@ -160,7 +157,7 @@ const Leaderboard = () => {
                                         </div>
                                     </div>
 
-                                    {/* Score */}
+
                                     <div className="text-right">
                                         <p className={`font-bold text-base ${getRankColor(index)}`}>{score.score}</p>
                                         <p className="text-gray-600 text-xs">pts</p>

@@ -1,4 +1,3 @@
-
 import { useNavigate } from 'react-router-dom';
 import { GiTimeBomb, GiElectric } from 'react-icons/gi';
 import { MdArrowBack, MdTimer, MdCheckCircle, MdDangerous, MdFavorite } from 'react-icons/md';
