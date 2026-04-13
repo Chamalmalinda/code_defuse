@@ -75,7 +75,7 @@ const DailyChallenge = () => {
     if (phase === 'completed') return (
         <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
             <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 text-center shadow-2xl">
-                <MdLock className="text-yellow-400 text-7xl mx-auto mb-4"
+                <MdLock className="text-yellow-400 text-7xl mx-auto mb-4 animate-glow"
                     style={{ filter: 'drop-shadow(0 0 8px #facc15)' }} />
                 <h2 className="text-2xl font-bold text-white mb-2 tracking-widest">
                     MISSION <span className="text-yellow-400">COMPLETE</span>
@@ -137,7 +137,7 @@ const DailyChallenge = () => {
 
                 <div className="text-center mb-6">
                     <GiTimeBomb
-                        className="text-yellow-400 text-7xl mx-auto mb-3"
+                        className="text-yellow-400 text-7xl mx-auto mb-3 animate-glow"
                         style={{ filter: 'drop-shadow(0 0 10px #facc15)' }}
                     />
                     <p className="text-gray-500 text-xs tracking-wide mb-2">Today's special mission awaits!</p>
